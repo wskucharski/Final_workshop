@@ -7,6 +7,13 @@
     <body>
     <div class="container">
         <h1>Interaktywne topo</h1>
+        <p>
+            {% if not request.user.is_anonymous %}Witaj, {{ request.user }}{% endif %}
+        </p>
+        <p>
+            <a href="/login">Zaloguj</a>
+            <a href="/logout">Wyloguj</a>
+        </p>
         {% block container %}
         {% endblock %}
     </div>

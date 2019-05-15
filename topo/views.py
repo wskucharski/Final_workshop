@@ -5,8 +5,13 @@ from .models import Area, Region, Sector, Crag, Route
 
 # Create your views here.
 
-class AreaView(View):
+class IndexView(View):
     def get(self,request):
+        areas = Area.objects.all()
+        return render(request, 'index.html', {'areas': areas})
+
+class AreaView(View):
+    def get(self, request):
         areas = Area.objects.all()
         return render(request, 'area.html', {'areas': areas})
 
@@ -38,3 +43,4 @@ class RouteView(View):
     def get(self, request, route_id):
         route = Route.objects.get(id=route_id)
         return render(request, 'route.html', {'route': route})
+
