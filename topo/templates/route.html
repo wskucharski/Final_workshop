@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block container %}
+    <p>Obszar: <a href="/area">{{ route.crag.sector.region.area.name }}</a></p>
+    <p>Region: <a href="/sector/{{ route.crag.sector.region.id }}">{{ route.crag.sector.region.name }}</a></p>
+    <p>Sektor: <a href="/crag/{{ route.crag.sector.id }}">{{ route.crag.sector.name }}</a></p>
+    <p>Skała: <a href="/routes/{{ route.crag.id }}">{{ route.crag.name }}</a></p>
+    <p>Droga: {{ route.name }}</p>
+    <p>Wycena: {{ route.grade }}</p>
+    <p>Długość: {{ route.length }} m</p>
+    {% if route.type %}<p>Charakter: {{ route.type }}</p>{% endif %}
+    <p>Liczba wyciągów: {{ route.pitches }}</p>
+    <p>Dodatkowe info: {{ route.additional_info }}</p>
+    <pu>Autor drogi: {{ route.author }}</pu>
+{% endblock %}

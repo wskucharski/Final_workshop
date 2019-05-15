@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block container %}
+    <p>Obszar: <a href="/area">{{ crag.sector.region.area.name }}</a></p>
+    <p>Region: <a href="/sector/{{ crag.sector.region.id }}">{{ crag.sector.region.name }}</a></p>
+    <p>Sektor: <a href="/crag/{{ crag.sector.id }}">{{ crag.sector.name }}</a></p>
+    <p>Skała: <a href="/routes/{{ crag.id }}">{{ crag.name }}</a></p>
+    <ul>
+    <p>Drogi:</p>
+    {% for route in crag_routes %}
+      <li><a href="/route/{{ route.id }}">{{ route.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

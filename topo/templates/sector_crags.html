@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block container %}
+    <p>Obszar: <a href="/area">{{ sector.region.area.name }}</a></p>
+    <p>Region: <a href="/sector/{{ sector.region.id }}">{{ sector.region.name }}</a></p>
+    <p>Sektor: <a href="/crag/{{ sector.id }}">{{ sector.name }}</a></p>
+    <ul>
+    <p>Skały:</p>
+    {% for crag in sector_crags %}
+      <li><a href="/routes/{{ crag.id }}">{{ crag.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

@@ -4,11 +4,11 @@ from django.db import models
 
 class Area(models.Model):
     name = models.CharField(max_length=128)
-    description = models.TextField()
+    description = models.TextField(null=True)
 
 class Region(models.Model):
     name = models.CharField(max_length=128)
-    description = models.TextField()
+    description = models.TextField(null=True)
     area = models.ForeignKey(Area, on_delete=models.SET_NULL, null=True)
 
 class Sector(models.Model):
