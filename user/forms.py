@@ -1,4 +1,6 @@
 from django import forms
+from .models import RATING_CHOICES
+
 
 
 class LoginForm(forms.Form):

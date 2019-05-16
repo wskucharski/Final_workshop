@@ -4,11 +4,12 @@
     <p>Region: <a href="/sector/{{ route.crag.sector.region.id }}">{{ route.crag.sector.region.name }}</a></p>
     <p>Sektor: <a href="/crag/{{ route.crag.sector.id }}">{{ route.crag.sector.name }}</a></p>
     <p>Skała: <a href="/routes/{{ route.crag.id }}">{{ route.crag.name }}</a></p>
-    {% if route.name %}<p>Droga: {{ route.name }}</p>{% endif %}
+    {% if route.name %}<p>Nazwa drogi: {{ route.name }}</p>{% endif %}
     <p>Wycena: {{ route.grade }}</p>
     {% if route.length %}<p>Długość: {{ route.length }} m</p>{% endif %}
     {% if route.type %}<p>Charakter: {{ route.type }}</p>{% endif %}
     {% if route.pitches %}<p>Liczba wyciągów: {{ route.pitches }}</p>{% endif %}
     {% if route.additional_info %}<p>Dodatkowe info: {{ route.additional_info }}</p>{% endif %}
     {% if route.author %}<p>Autor drogi: {{ route.author }}</p>{% endif %}
+    {% include 'rate_form.html' %}
 {% endblock %}

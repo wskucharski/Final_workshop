@@ -1,21 +1,51 @@
-<!doctype html>
-
-<html>
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <meta charset="utf-8"></head>
-    <body>
-    <div class="container">
-        <h1>Interaktywne topo</h1>
-        <p>
-            {% if not request.user.is_anonymous %}Witaj, {{ request.user }}{% endif %}
-        </p>
-        <p>
-            <a href="/login">Zaloguj</a>
-            <a href="/logout">Wyloguj</a>
-        </p>
-        {% block container %}
-        {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myTopo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">myTopo!</a>
+    <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a href="#" class="nav-link">Obszary</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">myProfile</a>
+        </li>
+    </ul>
     </div>
-    </body>
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Szukaj</button>
+    </form>
+    </ul>
+    <ul class="navbar-nav mr-left">
+        <li class="nav-item">
+            {% if request.user.is_anonymous %}
+            <a href="/login" class="nav-link">Zaloguj</a>
+            {% else  %}
+            <a class="nav-link">{{ user }}</a>
+            {% endif %}
+
+        </li>
+        <li class="nav-item">
+            {% if not request.user.is_anonymous %}
+            <a href="/logout" class="nav-link">Wyloguj</a>
+            {% endif %}
+        </li>
+    </ul>
+
+</nav>
+<div class="container">
+    {% block container %}
+    {% endblock %}
+</div>
+
+</body>
 </html>
+

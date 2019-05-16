@@ -5,6 +5,8 @@ from django.contrib.auth.views import auth_logout
 from django.template.response import TemplateResponse
 from django.views import View
 from .forms import LoginForm
+from topo.models import Route
+from .models import RouteRating
 
 
 
@@ -36,5 +38,35 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect('/')
+
+class RateView(View):
+    def post(self, request):
+        type = request.POST['type']
+        id = request.POST['id']
+
+        current_user = request.user
+        route = Route.objects.get(id=id)
+        rating = request.POST['rate']
+
+
+        RouteRating.objects.create(
+            user=current_user,
+            route=route,
+            rating=rating,
+        )
+        return HttpResponseRedirect(f'/{type}/{id}')
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

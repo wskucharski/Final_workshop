@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'topo',
     'user',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

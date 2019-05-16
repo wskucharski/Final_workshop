@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from topo.views import AreaView, AreaRegionView, RegionSectorView, SectorCragView, CragRouteView, RouteView, IndexView
-from user.views import LoginView, LogoutView
+from user.views import LoginView, LogoutView, RateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +29,5 @@ urlpatterns = [
     re_path('^route/(?P<route_id>(\d)+)$', RouteView.as_view()),
     re_path('^login$', LoginView.as_view()),
     re_path('^logout$', LogoutView.as_view()),
+    re_path(r'^rate$', RateView.as_view()),
 ]

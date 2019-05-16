@@ -3,10 +3,11 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .models import Area, Region, Sector, Crag, Route
 
+
 # Create your views here.
 
 class IndexView(View):
-    def get(self,request):
+    def get(self, request):
         areas = Area.objects.all()
         return render(request, 'index.html', {'areas': areas})
 
@@ -42,5 +43,21 @@ class CragRouteView(View):
 class RouteView(View):
     def get(self, request, route_id):
         route = Route.objects.get(id=route_id)
-        return render(request, 'route.html', {'route': route})
+        return render(request, 'route.html', {'route': route, 'type': 'route', 'id': route.id})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
