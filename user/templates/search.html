@@ -1,0 +1,46 @@
+<p>Wyniki:</p>
+
+<div>
+    <ul>
+        <p>Obszary:</p>
+        {% for area in areas %}
+            <li><a href="/area/{{ area.id }}">{{ area.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <ul>
+        <p>Regiony:</p>
+        {% for region in regions %}
+            <li><a href="/region/{{ region.id }}">{{ region.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <ul>
+        <p>Sektory:</p>
+        {% for sector in sectors %}
+            <li><a href="/sector/{{ sector.id }}">{{ sector.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <ul>
+        <p>Skały:</p>
+        {% for crag in crags %}
+            <li><a href="/crag/{{ crag.id }}">{{ crag.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <ul>
+        <p>Drogi:</p>
+        {% for route in routes %}
+            <li><a href="/route/{{ route.id }}">{{ route.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

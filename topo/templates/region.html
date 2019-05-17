@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% block container %}
+
+    <div>
     <p>Obszar: <a href="/area/{{ region.area.id }}">{{ region.area.name }}</a></p>
+    </div>
+
+    <div>
     <p>Region: <a href="/region/{{ region.id }}">{{ region.name }}</a></p>
+    </div>
+
+    <div>
     <ul>
     <p>Sektory:</p>
     {% for sector in region_sectors %}
       <li><a href="/sector/{{ sector.id }}">{{ sector.name }}</a></li>
     {% endfor %}
     </ul>
+    </div>
+
 {% endblock %}

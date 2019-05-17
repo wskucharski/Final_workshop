@@ -1,11 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import auth_logout
-from django.template.response import TemplateResponse
 from django.views import View
 from .forms import LoginForm
-from topo.models import Route
+from topo.models import Route, Crag, Sector, Region, Area
 from .models import RouteRating
 
 
@@ -39,7 +37,7 @@ class LogoutView(View):
         logout(request)
         return HttpResponseRedirect('/')
 
-class RateView(View):
+class RouteRateView(View):
     def post(self, request):
         type = request.POST['type']
         id = request.POST['id']
@@ -54,7 +52,35 @@ class RateView(View):
             route=route,
             rating=rating,
         )
-        return HttpResponseRedirect(f'/{type}/{id}')
+        return redirect(f'/{type}/{id}')
+
+class SearchView(View):
+    def get(self, request):
+
+            area_name = request.GET['search']
+            areas = Area.objects.filter(name__icontains=area_name)
+
+            region_name = request.GET['search']
+            regions = Region.objects.filter(name__icontains=region_name)
+
+            sector_name = request.GET['search']
+            sectors = Sector.objects.filter(name__icontains=sector_name)
+
+            crag_name = request.GET['search']
+            crags = Crag.objects.filter(name__icontains=crag_name)
+
+            route_name = request.GET['search']
+            routes = Route.objects.filter(name__icontains=route_name)
+
+            ctx = {
+                'areas': areas,
+                'regions': regions,
+                'sectors': sectors,
+                'crags': crags,
+                'routes': routes
+            }
+
+            return render(request, 'search.html', ctx)
 
 
 

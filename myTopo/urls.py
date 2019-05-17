@@ -15,19 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from topo.views import AreaView, AreaRegionView, RegionSectorView, SectorCragView, CragRouteView, RouteView, IndexView
-from user.views import LoginView, LogoutView, RateView
+from topo.views import AreaListView, AreaView, AreaRegionView, RegionSectorView, SectorCragView, RouteView, IndexView
+from user.views import LoginView, LogoutView, RouteRateView, SearchView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('^$', IndexView.as_view()),
-    re_path('^area$', AreaView.as_view()),
-    re_path('^region/(?P<area_id>(\d)+)$', AreaRegionView.as_view()),
-    re_path('^sector/(?P<region_id>(\d)+)$', RegionSectorView.as_view()),
-    re_path('^crag/(?P<sector_id>(\d)+)$', SectorCragView.as_view()),
-    re_path('^routes/(?P<crag_id>(\d)+)$', CragRouteView.as_view()),
+    re_path(r'^area_list$', AreaListView.as_view()),
+    re_path('^area/(?P<area_id>(\d)+)$', AreaView.as_view()),
+    re_path('^region/(?P<region_id>(\d)+)$', AreaRegionView.as_view()),
+    re_path('^sector/(?P<sector_id>(\d)+)$', RegionSectorView.as_view()),
+    re_path('^crag/(?P<crag_id>(\d)+)$', SectorCragView.as_view()),
     re_path('^route/(?P<route_id>(\d)+)$', RouteView.as_view()),
     re_path('^login$', LoginView.as_view()),
     re_path('^logout$', LogoutView.as_view()),
-    re_path(r'^rate$', RateView.as_view()),
+    re_path(r'^rate$', RouteRateView.as_view()),
+    re_path(r'^search$', SearchView.as_view()),
 ]
