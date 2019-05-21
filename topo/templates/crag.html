@@ -1,22 +1,32 @@
 {% extends 'base.html' %}
-{% block container %}
+{% block content %}
 
-    <div>
-    <p>Obszar: <a href="/area_list">{{ crag.sector.areas.name }}</a></p>
-    <p>Region: <a href="/region/{{ crag.sector.region.id }}">{{ crag.sector.region.name }}</a></p>
-    <p>Sektor: <a href="/sector/{{ crag.sector.id }}">{{ crag.sector.name }}</a></p>
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/area_list">Obszary</a></li>
+    <li class="breadcrumb-item"><a href="/area_list">{{ crag.sector.region.area.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/region/{{ crag.sector.region.id }}">{{ crag.sector.region.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/sector/{{ crag.sector.id }}">{{ crag.sector.name }}</a></li>
+    <li class="active breadcrumb-item">{{ crag.name }}</li>
+    </ol>
+
+    <div class="jumbotron">
+    <h2 class="text-center">{{ crag.name }}</h2>
+    <div class="row">
+        {% if crag.description %}<div class="col">{{ crag.description }}</div>{% endif %}
+    </div>
+    <div class="row">
+        {% if crag.rock_type %}<div class="col">Rodzaj skały: {{ crag.rock_type }}</div>{% endif %}
+        {% if crag.number_of_routes %}<div class="col"> Liczba dróg: {{ crag.number_of_routes }}</div>{% endif %}
+        {% if crag.face %}<div class="col"> Wystawa :{{ crag.face }}</div>{% endif %}
+    </div>
     </div>
 
     <div>
-    <p>Skała: <a href="/crag/{{ crag.id }}">{{ crag.name }}</a></p>
-    </div>
-
-    <div>
-    <ul>
-    <p>Drogi:</p>
+    <ul class="list-group">
+    <h3>Drogi:</h3>
     {% for route in crag_routes %}
-      <li><a href="/route/{{ route.id }}">{{ route.name }}</a></li>
+      <li class="list-group-item"><a href="/route/{{ route.id }}">{{ route.name }} ({{ route.grade }})</a></li>
     {% endfor %}
     </ul>
     </div>
-{% endblock %}
+{% endblock content %}

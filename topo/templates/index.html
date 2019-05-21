@@ -1,9 +1,1 @@
-{% extends 'base.html' %}
-{% block container %}
-    <ul>
-    <p>Obszary:</p>
-    {% for area in area %}
-      <li><a href="/area/{{ area.id }}">{{ area.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% endblock %}
+{% include 'area_list.html' %}

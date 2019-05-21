@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
-{% block container %}
-    <div>
-    <p>Obszar: <a href="/area_list">{{ route.crag.sector.areas.name }}</a></p>
-    <p>Region: <a href="/region/{{ route.crag.sector.region.id }}">{{ route.crag.sector.region.name }}</a></p>
-    <p>Sektor: <a href="/sector/{{ route.crag.sector.id }}">{{ route.crag.sector.name }}</a></p>
-    <p>Skała: <a href="/crag/{{ route.crag.id }}">{{ route.crag.name }}</a></p>
-    </div>
+{% block content %}
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/area_list">Obszary</a></li>
+    <li class="breadcrumb-item"><a href="/area/{{ route.crag.sector.region.area.id }}">{{ route.crag.sector.region.area.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/area_">{{ route.crag.sector.areas.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/region/{{ route.crag.sector.region.id }}">{{ route.crag.sector.region.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/sector/{{ route.crag.sector.id }}">{{ route.crag.sector.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/crag/{{ route.crag.id }}">{{ route.crag.name }}</a></li>
+    <li class="active breadcrumb-item">{{ route.name }}</li>
+    </ol>
 
-    <div>
-    {% if route.name %}<p>Droga: {{ route.name }}</p>{% endif %}
+    <div class="jumbotron">
+    {% if route.name %}
+        <h2 class="text-center">{{ route.name }}</h2>
+    {% else %}
+        <h2 class="text-center">{{ route.grade }}</h2>
+    {% endif %}
     <p>Wycena: {{ route.grade }}</p>
     {% if route.length %}<p>Długość: {{ route.length }} m</p>{% endif %}
     {% if route.type %}<p>Charakter: {{ route.type }}</p>{% endif %}
@@ -19,4 +26,4 @@
     Średnia ocen: {{ avg_rating }}/5
     </div>
 
-{% endblock %}
+{% endblock content %}

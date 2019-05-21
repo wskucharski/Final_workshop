@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
-{% block container %}
-    <ul>
-    <p>Obszary:</p>
+{% block content %}
+    <ol class="breadcrumb">
+    <li class="active breadcrumb-item">Obszary</li>
+    </ol>
+
+    <div class="jumbotron">
+    <ul class="list-group">
+    <h2 class="text-center">Obszary:</h2>
     {% for area in area %}
-      <li><a href="/area/{{ area.id }}">{{ area.name }}</a></li>
+      <li class="list-group-item"><a href="/area/{{ area.id }}">{{ area.name }}</a></li>
     {% endfor %}
     </ul>
-{% endblock %}
+    </div>
+{% endblock content %}

@@ -1,41 +1,25 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from django.views import View
-from .forms import LoginForm
 from topo.models import Route, Crag, Sector, Region, Area
 from .models import RouteRating
+from django.contrib import messages
+from .forms import UserRegisterForm
 
-
-
-
-
-
-class LoginView(View):
+class RegisterView(View):
     def get(self, request):
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        form = UserRegisterForm()
+        return render(request, 'user_registration.html', {'form': form})
 
-    def post(self, request, *args, **kwargs):
-
-        if not request.user.is_anonymous:
-            return HttpResponseRedirect('/')
-
-        data = request.POST
-        print(request.POST)
-        user = authenticate(username=data['username'], password=data['password'])
-
-        if user is not None:
-            login(request, user)
-
-            return HttpResponseRedirect('/')
-
-        return render(request, 'login.html')
-
-class LogoutView(View):
-    def get(self, request):
-        logout(request)
-        return HttpResponseRedirect('/')
+    def post(self, request):
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            form.save()
+            messages.success(request, f'Stworzono użytkownika {username}! Możesz się zalogować!')
+            return redirect('/login')
+        else:
+            form = UserRegisterForm(request.POST)
+            return render(request, 'user_registration.html', {'form': form})
 
 class RouteRateView(View):
     def post(self, request):
@@ -55,21 +39,22 @@ class RouteRateView(View):
         return redirect(f'/{type}/{id}')
 
 class SearchView(View):
-    def get(self, request):
 
-            area_name = request.GET['search']
+    def post(self, request):
+
+            area_name = request.POST['search']
             areas = Area.objects.filter(name__icontains=area_name)
 
-            region_name = request.GET['search']
+            region_name = request.POST['search']
             regions = Region.objects.filter(name__icontains=region_name)
 
-            sector_name = request.GET['search']
+            sector_name = request.POST['search']
             sectors = Sector.objects.filter(name__icontains=sector_name)
 
-            crag_name = request.GET['search']
+            crag_name = request.POST['search']
             crags = Crag.objects.filter(name__icontains=crag_name)
 
-            route_name = request.GET['search']
+            route_name = request.POST['search']
             routes = Route.objects.filter(name__icontains=route_name)
 
             ctx = {

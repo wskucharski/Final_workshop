@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
-{% block container %}
+{% block content %}
 
-    <div>
-    <p>Obszar: <a href="/area/{{ sector.region.area.id }}">{{ sector.region.area.name }}</a></p>
-    <p>Region: <a href="/region/{{ sector.region.id }}">{{ sector.region.name }}</a></p>
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/area_list">Obszary</a></li>
+    <li class="breadcrumb-item"><a href="/area/{{ sector.region.area.id }}">{{ sector.region.area.name }}</a></li>
+    <li class="breadcrumb-item"><a href="/region/{{ sector.region.id }}">{{ sector.region.name }}</a></li>
+    <li class="active breadcrumb-item">{{ sector.name }}</li>
+    </ol>
+
+    <div class="jumbotron">
+    <h2 class="text-center">{{ sector.name }}</h2>
+    <div class="row">
+        {% if sector.description %}<div class="col">{{ sector.description }}</div>{% endif %}
+    <div class="row">
+        {% if sector.number_of_crags %}<div class="col">{{ sector.number_of_crags }}</div>{% endif %}
+    </div>
+    </div>
     </div>
 
     <div>
-    <p>Sektor: {{ sector.name }}</p>
-    </div>
-
-    <div>
-    <ul>
+    <ul class="list-group">
     <p>Skały:</p>
     {% for crag in sector_crags %}
-      <li><a href="/crag/{{ crag.id }}">{{ crag.name }}</a></li>
+      <li class="list-group-item"><a href="/crag/{{ crag.id }}">{{ crag.name }}</a></li>
     {% endfor %}
     </ul>
     </div>
 
-{% endblock %}
+{% endblock content %}

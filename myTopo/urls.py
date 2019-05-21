@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, re_path
 from topo.views import AreaListView, AreaView, AreaRegionView, RegionSectorView, SectorCragView, RouteView, IndexView
-from user.views import LoginView, LogoutView, RouteRateView, SearchView
+from user.views import RouteRateView, SearchView, RegisterView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,8 +28,9 @@ urlpatterns = [
     re_path('^sector/(?P<sector_id>(\d)+)$', RegionSectorView.as_view()),
     re_path('^crag/(?P<crag_id>(\d)+)$', SectorCragView.as_view()),
     re_path('^route/(?P<route_id>(\d)+)$', RouteView.as_view()),
-    re_path('^login$', LoginView.as_view()),
-    re_path('^logout$', LogoutView.as_view()),
+    re_path('^login$', LoginView.as_view(template_name='user_login.html')),
+    re_path('^logout$', LogoutView.as_view(template_name='user_logout.html')),
     re_path(r'^rate$', RouteRateView.as_view()),
     re_path(r'^search$', SearchView.as_view()),
+    re_path(r'^register$', RegisterView.as_view()),
 ]

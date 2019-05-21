@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
-{% block container %}
+{% block content %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/area_list">Obszary</a></li>
+        <li class="active breadcrumb-item">{{ area.name }}</li>
+    </ol>
 
-    <div>
-    <p>Obszar: <a href="/area_list">{{ area.name }}</a></p>
+    <div class=" jumbotron">
+    <h2 class="text-center">{{ area.name }}</h2>
+    <div class="row1">
+        <div class="col">
+            <span>{{ area.description }}</span>
+        </div>
+    </div>
     </div>
 
-    <div>
+    <div class="jumbotron">
     <ul>
     <p>Regiony:</p>
     {% for region in area_regions %}
@@ -14,4 +23,4 @@
     </ul>
     </div>
 
-{% endblock %}
+{% endblock content %}

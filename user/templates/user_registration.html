@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="POST" xmlns="http://www.w3.org/1999/html">
+        {% csrf_token %}
+        <fieldset class="form-group">
+        {{ form|crispy }}
+        <legend class="border-botton mb-4">Zarejestruj się</legend>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Zarejestruj</button>
+        </div>
+
+    </form>
+    <div class="border-top pt-3">
+    <small class="text-muted">
+        Masz już konto? Zaloguj się! <a class="ml-2 " href="/login">Zaloguj się</a>
+    </small>
+    </div>
+{% endblock content %}

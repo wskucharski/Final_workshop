@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Area(models.Model):
@@ -13,6 +14,7 @@ class Region(models.Model):
 
 class Sector(models.Model):
     name = models.CharField(max_length=128)
+    description = models.TextField(null=True)
     number_of_crags = models.IntegerField(null=True)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True)
 
@@ -95,5 +97,6 @@ class Route(models.Model):
     additional_info = models.CharField(max_length=255, null=True)
     author = models.CharField(max_length=128, null=True)
     crag = models.ForeignKey(Crag, on_delete=models.SET_NULL, null=True)
+
 
 
